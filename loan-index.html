@@ -175,6 +175,9 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 /* On dark/green hero background — readable tints */
 .hero .eco-blue{color:#60B8FF}
 .hero .eco-red{color:#FF8080}
+
+.submit-btn.not-ready{background:var(--surf-hi);color:var(--outline);box-shadow:none}
+.submit-btn.not-ready:active{background:var(--surf-hi);transform:none}
 </style>
 </head>
 <body>
@@ -247,11 +250,11 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
         <input type="range" id="amtSlider" min="50" max="3500" step="50" value="300">
         <div class="range-labels"><span>$50</span><span>$1,000</span><span>$2,500</span><span>$3,500</span></div>
         <div class="period-row" id="periodRow">
-          <button class="period-pill on" data-days="7" data-rate="0.15">7 days</button>
-          <button class="period-pill" data-days="14" data-rate="0.12">14 days</button>
-          <button class="period-pill" data-days="30" data-rate="0.10">30 days</button>
-          <button class="period-pill" data-days="60" data-rate="0.08">60 days</button>
-          <button class="period-pill" data-days="90" data-rate="0.07">90 days</button>
+          <button class="period-pill on" data-days="7" data-rate="0.08">7 days</button>
+          <button class="period-pill" data-days="14" data-rate="0.10">14 days</button>
+          <button class="period-pill" data-days="30" data-rate="0.12">30 days</button>
+          <button class="period-pill" data-days="60" data-rate="0.15">60 days</button>
+          <button class="period-pill" data-days="90" data-rate="0.18">90 days</button>
         </div>
         <div class="calc-summary">
           <div class="cs-item">
@@ -284,7 +287,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 
       <!-- Full Name -->
       <div class="field">
-        <div class="field-lbl">Full Name</div>
+        <div class="field-lbl">Full Name <span style="color:var(--err);font-weight:700">*</span></div>
         <div class="field-wrap" id="fw-name">
           <div class="field-ic">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -296,7 +299,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 
       <!-- National ID -->
       <div class="field">
-        <div class="field-lbl">National ID</div>
+        <div class="field-lbl">National ID <span style="color:var(--err);font-weight:700">*</span></div>
         <div class="field-wrap" id="fw-id">
           <div class="field-ic">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 15h8"/></svg>
@@ -308,7 +311,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 
       <!-- EcoCash Number -->
       <div class="field">
-        <div class="field-lbl"><span class="eco-blue">Eco</span><span class="eco-red">Cash</span> / Econet Number</div>
+        <div class="field-lbl"><span class="eco-blue">Eco</span><span class="eco-red">Cash</span> / Econet Number <span style="color:var(--err);font-weight:700">*</span></div>
         <div class="field-wrap" id="fw-phone">
           <div class="field-pre">
             <img src="https://flagcdn.com/w20/zw.png" alt="ZW" onerror="this.style.display='none'">
@@ -321,7 +324,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 
       <!-- Employment -->
       <div class="field">
-        <div class="field-lbl">Employment Status</div>
+        <div class="field-lbl">Employment Status <span style="color:var(--err);font-weight:700">*</span></div>
         <div class="field-wrap" id="fw-emp">
           <div class="field-ic">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
@@ -344,7 +347,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 
       <!-- Loan Purpose -->
       <div class="field">
-        <div class="field-lbl">Loan Purpose</div>
+        <div class="field-lbl">Loan Purpose <span style="color:var(--err);font-weight:700">*</span></div>
         <div class="field-wrap" id="fw-purpose">
           <div class="field-ic">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -389,7 +392,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 
 <!-- FOOT -->
 <div class="foot">
-  <button class="submit-btn" id="submitBtn" disabled>
+  <button class="submit-btn" id="submitBtn">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
     Apply Now
   </button>
@@ -407,7 +410,7 @@ function rip(btn,e){
 }
 
 // ─── CALCULATOR ──────────────────────────────────────────────────────────────
-var loanAmt=300,loanDays=7,loanRate=0.15;
+var loanAmt=300,loanDays=7,loanRate=0.08;
 var fmtUSD=function(n){return'$'+n.toFixed(2);};
 var fmtShort=function(n){return'$'+(n>=1000?(n/1000).toFixed(1)+'k':n.toFixed(0));};
 
@@ -512,11 +515,11 @@ fnEl.addEventListener('blur',function(){
   touched.name=true;
   var e=validateName(this.value);
   if(e)setErr('name',e);else setOk('name');
-  checkSubmit();
+  updateSubmitState();
 });
 fnEl.addEventListener('input',function(){
   if(touched.name){var e=validateName(this.value);if(e)setErr('name',e);else setOk('name');}
-  checkSubmit();
+  updateSubmitState();
 });
 
 // ID
@@ -526,11 +529,11 @@ idEl.addEventListener('blur',function(){
   touched.id=true;
   var e=validateID(this.value);
   if(e)setErr('id',e);else setOk('id');
-  checkSubmit();
+  updateSubmitState();
 });
 idEl.addEventListener('input',function(){
   if(touched.id){var e=validateID(this.value);if(e)setErr('id',e);else setOk('id');}
-  checkSubmit();
+  updateSubmitState();
 });
 
 // Phone
@@ -539,13 +542,13 @@ phEl.addEventListener('focus',function(){setFocus('phone',true);});
 phEl.addEventListener('input',function(){
   this.value=this.value.replace(/[^0-9]/g,'').slice(0,9);
   if(touched.phone){var e=validatePhone(this.value);if(e)setErr('phone',e);else setOk('phone');}
-  checkSubmit();
+  updateSubmitState();
 });
 phEl.addEventListener('blur',function(){
   touched.phone=true;
   var e=validatePhone(this.value);
   if(e)setErr('phone',e);else setOk('phone');
-  checkSubmit();
+  updateSubmitState();
 });
 
 // Employment & purpose
@@ -555,7 +558,7 @@ phEl.addEventListener('blur',function(){
     var label=id==='emp'?'Employment status':'Loan purpose';
     var e=validateSelect(this.value,label);
     if(e)setErr(id,e);else setOk(id);
-    checkSubmit();
+    updateSubmitState();
   });
 });
 
@@ -572,13 +575,35 @@ termsEl.addEventListener('change',function(){
     cbVis.style.borderColor='var(--outline-v)';
     cbVis.innerHTML='';
   }
-  checkSubmit();
+  updateSubmitState();
 });
 
 // ─── SUBMIT ───────────────────────────────────────────────────────────────────
 document.getElementById('submitBtn').addEventListener('pointerdown',function(e){rip(this,e);},{passive:true});
 document.getElementById('submitBtn').addEventListener('click',function(){
-  if(!validateAll())return;
+  // Force validate all fields and show errors
+  var nErr=validateName(document.getElementById('f-name').value);
+  var iErr=validateID(document.getElementById('f-id').value);
+  var pErr=validatePhone(document.getElementById('f-phone').value);
+  var eErr=validateSelect(document.getElementById('f-emp').value,'Employment status');
+  var purErr=validateSelect(document.getElementById('f-purpose').value,'Loan purpose');
+  touched.name=true;touched.id=true;touched.phone=true;touched.emp=true;touched.purpose=true;
+  if(nErr)setErr('name',nErr);else setOk('name');
+  if(iErr)setErr('id',iErr);else setOk('id');
+  if(pErr)setErr('phone',pErr);else setOk('phone');
+  if(eErr)setErr('emp',eErr);else setOk('emp');
+  if(purErr)setErr('purpose',purErr);else setOk('purpose');
+  if(!document.getElementById('f-terms').checked){
+    document.getElementById('checkbox-visual').style.boxShadow='0 0 0 2px var(--err)';
+    setTimeout(function(){document.getElementById('checkbox-visual').style.boxShadow='';},2000);
+  }
+  if(!validateAll()){
+    // Scroll to first error
+    var firstErr=document.querySelector('.field-wrap.err');
+    if(firstErr)firstErr.scrollIntoView({behavior:'smooth',block:'center'});
+    hap([40,20,40]);
+    return;
+  }
   hap(18);
   var phone=document.getElementById('f-phone').value.replace(/[^0-9]/g,'');
   var data={
