@@ -51,14 +51,19 @@ select{-webkit-appearance:none;appearance:none}
 .scroll::-webkit-scrollbar{display:none}
 
 /* HERO BANNER */
-.hero{background:linear-gradient(155deg,var(--grn) 0%,var(--grn2) 100%);padding:24px 18px 32px;position:relative;overflow:hidden;min-height:360px}
-.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-30px;left:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
-.hero-lbl{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;position:relative;z-index:1}
-.hero-title{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px;line-height:1.2;margin-bottom:6px;position:relative;z-index:1}
-.hero-sub{font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;position:relative;z-index:1;max-width:280px}
-.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;position:relative;z-index:1}
-.hero-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:500;padding:5px 12px;border-radius:var(--r-full);display:inline-flex;align-items:center;gap:5px}
+.hero-section{
+  position:relative;overflow:hidden;
+  /* Tall enough to show woman full body + calculator */
+}
+.hero-content{
+  position:relative;z-index:1;
+  padding:28px 18px 20px;
+}
+.hero-lbl{font-size:11px;font-weight:700;color:rgba(255,255,255,.65);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.hero-title{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px;line-height:1.25;margin-bottom:6px}
+.hero-sub{font-size:13px;color:rgba(255,255,255,.75);line-height:1.65;max-width:300px}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.hero-pill{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:12px;font-weight:500;padding:5px 12px;border-radius:var(--r-full);display:inline-flex;align-items:center;gap:5px}
 
 
 /* Hero image */
@@ -86,35 +91,44 @@ select{-webkit-appearance:none;appearance:none}
 .hero-stat-sep{width:1px;height:32px;background:rgba(255,255,255,.2)}
 
 /* CALCULATOR CARD */
-.calc-card{margin:14px 14px 0;background:var(--surf);border-radius:var(--r-xl);box-shadow:var(--sh-grn);overflow:hidden}
-.calc-head{background:var(--grn);padding:14px 18px;display:flex;align-items:center;gap:10px}
+.calc-inset{
+  position:relative;z-index:1;
+  margin:0 14px 14px;
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:var(--r-xl);
+  overflow:hidden;
+}
+.calc-head{background:rgba(0,0,0,.2);padding:14px 18px;display:flex;align-items:center;gap:10px}
 .calc-head-ic{width:32px;height:32px;border-radius:var(--r-full);background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .calc-head-t{font-size:15px;font-weight:700;color:#fff}
-.calc-head-s{font-size:11px;color:rgba(255,255,255,.65);margin-top:1px}
-.calc-body{padding:18px}
+.calc-head-s{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px}
+.calc-body{padding:16px 18px 18px}
 
 /* Amount slider */
 .amount-display{text-align:center;margin-bottom:16px}
-.amount-val{font-size:44px;font-weight:800;color:var(--grn);letter-spacing:-1.5px;font-feature-settings:'tnum';line-height:1}
-.amount-val span{font-size:22px;font-weight:600;color:var(--on-surf-v)}
-.amount-lbl{font-size:12px;color:var(--on-surf-v);margin-top:4px}
+.amount-val{font-size:44px;font-weight:800;color:#fff;letter-spacing:-1.5px;font-feature-settings:'tnum';line-height:1}
+.amount-val span{font-size:22px;font-weight:600;color:rgba(255,255,255,.7)}
+.amount-lbl{font-size:12px;color:rgba(255,255,255,.6);margin-top:4px}
 
-input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:3px;background:var(--outline-v);outline:none;margin:6px 0}
+input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:3px;background:rgba(255,255,255,.25);outline:none;margin:6px 0}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--grn);box-shadow:0 2px 8px rgba(0,107,63,.35);cursor:pointer;border:3px solid #fff}
 input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--grn);box-shadow:0 2px 8px rgba(0,107,63,.35);cursor:pointer;border:3px solid #fff}
-.range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--on-surf-v);margin-top:4px}
+.range-labels{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.55);margin-top:4px}
 
 /* Period pills */
 .period-row{display:flex;gap:7px;flex-wrap:nowrap;margin-top:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
 .period-row::-webkit-scrollbar{display:none}
-.period-pill{flex-shrink:0;height:36px;padding:0 14px;border-radius:var(--r-full);border:1.5px solid var(--outline-v);background:var(--surf-lo);color:var(--on-surf-v);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap}
-.period-pill.on{border-color:var(--grn);background:var(--grn-cont);color:var(--on-grn-cont);font-weight:700}
+.period-pill{flex-shrink:0;height:36px;padding:0 14px;border-radius:var(--r-full);border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap}
+.period-pill.on{border-color:var(--gold);background:var(--gold);color:#0A1F14;font-weight:700}
 
 /* Summary row */
-.calc-summary{margin-top:16px;background:var(--surf-lo);border-radius:var(--r-md);padding:14px 16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.calc-summary{margin-top:16px;background:rgba(0,0,0,.2);border-radius:var(--r-md);padding:14px 16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 .cs-item{text-align:center}
-.cs-val{font-size:15px;font-weight:700;color:var(--grn);font-feature-settings:'tnum'}
-.cs-lbl{font-size:10px;color:var(--on-surf-v);margin-top:2px;letter-spacing:.3px}
+.cs-val{font-size:15px;font-weight:700;color:var(--gold);font-feature-settings:'tnum'}
+.cs-lbl{font-size:10px;color:rgba(255,255,255,.55);margin-top:2px;letter-spacing:.3px}
 
 /* FORM */
 .form-section{margin:14px 14px 0;background:var(--surf);border-radius:var(--r-xl);box-shadow:var(--sh1);overflow:hidden}
@@ -177,13 +191,15 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 
 <div class="scroll" id="mainScroll">
 
-  <!-- HERO -->
-  <div class="hero">
-    <!-- Background photo: Unsplash open license - African mobile money -->
+  <!-- HERO + CALCULATOR (shared background) -->
+  <div class="hero-section">
+    <!-- Background image spans the full section -->
     <div class="hero-img-wrap">
-      <img class="hero-img" src="https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0?w=800&q=85&auto=format&fit=crop" alt="Mobile banking" onerror="this.style.display='none'">
+      <img class="hero-img" src="https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0?w=900&q=85&auto=format&fit=crop" alt="Woman smiling at phone" onerror="this.style.display='none'">
       <div class="hero-img-overlay"></div>
     </div>
+
+    <!-- Hero text -->
     <div class="hero-content">
       <div class="hero-lbl">Zimbabwe's Fastest Loan</div>
       <div class="hero-title">Cash in your<br><span class="eco-blue">Eco</span><span class="eco-red">Cash</span> wallet<br><span class="hero-title-accent">in minutes</span></div>
@@ -211,51 +227,50 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
         <span class="hero-pill">🔒 Secure</span>
       </div>
     </div>
-  </div>
 
-  <!-- LOAN CALCULATOR -->
-  <div class="calc-card">
-    <div class="calc-head">
-      <div class="calc-head-ic">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
-      </div>
-      <div>
-        <div class="calc-head-t">Loan Calculator</div>
-        <div class="calc-head-s">Drag to set your amount</div>
-      </div>
-    </div>
-    <div class="calc-body">
-      <div class="amount-display">
-        <div class="amount-val"><span>USD </span><span id="amtDisplay">200</span></div>
-        <div class="amount-lbl">Loan Amount</div>
-      </div>
-      <input type="range" id="amtSlider" min="50" max="3500" step="50" value="300">
-      <div class="range-labels"><span>$50</span><span>$500</span><span>$1,000</span><span>$3,500</span></div>
-
-      <div class="period-row" id="periodRow">
-        <button class="period-pill on" data-days="7" data-rate="0.15">7 days</button>
-        <button class="period-pill" data-days="14" data-rate="0.12">14 days</button>
-        <button class="period-pill" data-days="30" data-rate="0.10">30 days</button>
-        <button class="period-pill" data-days="60" data-rate="0.08">60 days</button>
-        <button class="period-pill" data-days="90" data-rate="0.07">90 days</button>
-      </div>
-
-      <div class="calc-summary">
-        <div class="cs-item">
-          <div class="cs-val" id="csInterest">$30.00</div>
-          <div class="cs-lbl">Interest</div>
+    <!-- Calculator sits inside the same image section -->
+    <div class="calc-inset">
+      <div class="calc-head">
+        <div class="calc-head-ic">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
         </div>
-        <div class="cs-item">
-          <div class="cs-val" id="csTotal">$230.00</div>
-          <div class="cs-lbl">Total Repay</div>
+        <div>
+          <div class="calc-head-t">Loan Calculator</div>
+          <div class="calc-head-s">Drag to set your amount</div>
         </div>
-        <div class="cs-item">
-          <div class="cs-val" id="csDue">7 days</div>
-          <div class="cs-lbl">Due Date</div>
+      </div>
+      <div class="calc-body">
+        <div class="amount-display">
+          <div class="amount-val"><span>USD </span><span id="amtDisplay">300</span></div>
+          <div class="amount-lbl">Loan Amount</div>
+        </div>
+        <input type="range" id="amtSlider" min="50" max="3500" step="50" value="300">
+        <div class="range-labels"><span>$50</span><span>$1,000</span><span>$2,500</span><span>$3,500</span></div>
+        <div class="period-row" id="periodRow">
+          <button class="period-pill on" data-days="7" data-rate="0.15">7 days</button>
+          <button class="period-pill" data-days="14" data-rate="0.12">14 days</button>
+          <button class="period-pill" data-days="30" data-rate="0.10">30 days</button>
+          <button class="period-pill" data-days="60" data-rate="0.08">60 days</button>
+          <button class="period-pill" data-days="90" data-rate="0.07">90 days</button>
+        </div>
+        <div class="calc-summary">
+          <div class="cs-item">
+            <div class="cs-val" id="csInterest">$45.00</div>
+            <div class="cs-lbl">Interest</div>
+          </div>
+          <div class="cs-item">
+            <div class="cs-val" id="csTotal">$345.00</div>
+            <div class="cs-lbl">Total Repay</div>
+          </div>
+          <div class="cs-item">
+            <div class="cs-val" id="csDue">7 days</div>
+            <div class="cs-lbl">Due Date</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 
   <!-- APPLICATION FORM -->
   <div class="form-section" style="margin-bottom:0">
