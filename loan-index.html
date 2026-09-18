@@ -51,14 +51,28 @@ select{-webkit-appearance:none;appearance:none}
 .scroll::-webkit-scrollbar{display:none}
 
 /* HERO BANNER */
-.hero{background:linear-gradient(155deg,var(--grn) 0%,var(--grn2) 100%);padding:24px 18px 28px;position:relative;overflow:hidden}
+.hero{background:linear-gradient(155deg,var(--grn) 0%,var(--grn2) 100%);padding:24px 18px 32px;position:relative;overflow:hidden;min-height:320px}
 .hero::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none}
 .hero::after{content:'';position:absolute;bottom:-30px;left:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
 .hero-lbl{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;position:relative;z-index:1}
 .hero-title{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px;line-height:1.2;margin-bottom:6px;position:relative;z-index:1}
 .hero-sub{font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;position:relative;z-index:1;max-width:280px}
 .hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;position:relative;z-index:1}
-.hero-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:500;padding:5px 12px;border-radius:var(--r-full)}
+.hero-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:500;padding:5px 12px;border-radius:var(--r-full);display:inline-flex;align-items:center;gap:5px}
+
+
+/* Hero image */
+.hero{position:relative}
+.hero-img-wrap{position:absolute;inset:0;z-index:0;border-radius:0}
+.hero-img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(.4)}
+.hero-img-overlay{position:absolute;inset:0;background:linear-gradient(155deg,rgba(0,107,63,.92) 0%,rgba(0,84,50,.88) 100%)}
+.hero-content{position:relative;z-index:1}
+.hero-title-accent{color:var(--gold)}
+.hero-stats{display:flex;align-items:center;gap:0;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:var(--r-md);padding:12px 0;margin:14px 0 10px}
+.hero-stat{flex:1;text-align:center}
+.hero-stat-val{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.hero-stat-lbl{font-size:10px;color:rgba(255,255,255,.6);margin-top:2px;font-weight:500;letter-spacing:.3px}
+.hero-stat-sep{width:1px;height:32px;background:rgba(255,255,255,.2)}
 
 /* CALCULATOR CARD */
 .calc-card{margin:14px 14px 0;background:var(--surf);border-radius:var(--r-xl);box-shadow:var(--sh-grn);overflow:hidden}
@@ -128,6 +142,10 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .submit-note{text-align:center;font-size:11px;color:var(--on-surf-v);margin-top:7px;line-height:1.5}
 
 .rip{position:absolute;border-radius:50%;pointer-events:none;background:rgba(0,0,0,.09);transform:scale(0);animation:ripple .5s ease forwards}
+
+/* EcoCash brand text coloring */
+.eco-blue{color:#0057B8;font-weight:inherit}
+.eco-red{color:#CC0000;font-weight:inherit}
 </style>
 </head>
 <body>
@@ -146,13 +164,37 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 
   <!-- HERO -->
   <div class="hero">
-    <div class="hero-lbl">Zimbabwe's Fastest Loan</div>
-    <div class="hero-title">Cash in your wallet<br>in minutes</div>
-    <div class="hero-sub">Apply online, authorize via EcoCash PIN — funds disbursed instantly to your wallet.</div>
-    <div class="hero-pills">
-      <span class="hero-pill">⚡ Instant Disbursement</span>
-      <span class="hero-pill">📱 EcoCash</span>
-      <span class="hero-pill">✓ No Paperwork</span>
+    <!-- Background photo: Unsplash open license - African mobile money -->
+    <div class="hero-img-wrap">
+      <img class="hero-img" src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=800&q=80&auto=format&fit=crop&crop=faces,center" alt="Mobile banking" onerror="this.style.display='none'">
+      <div class="hero-img-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-lbl">Zimbabwe's Fastest Loan</div>
+      <div class="hero-title">Cash in your<br><span class="eco-blue">Eco</span><span class="eco-red">Cash</span> wallet<br><span class="hero-title-accent">in minutes</span></div>
+      <div class="hero-sub">No bank account needed. Apply in 2 minutes, authorize with your <span class="eco-blue">Eco</span><span class="eco-red">Cash</span> PIN, and receive funds instantly — 24/7.</div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-val">$50</div>
+          <div class="hero-stat-lbl">Minimum</div>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">$3,500</div>
+          <div class="hero-stat-lbl">Maximum</div>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">2 min</div>
+          <div class="hero-stat-lbl">To Apply</div>
+        </div>
+      </div>
+      <div class="hero-pills">
+        <span class="hero-pill">⚡ Instant</span>
+        <span class="hero-pill hero-pill-eco"><img src="assets/ecocash.png" alt="EcoCash" style="height:16px;width:auto;filter:brightness(0) invert(1)"></span>
+        <span class="hero-pill">✓ No Paperwork</span>
+        <span class="hero-pill">🔒 Secure</span>
+      </div>
     </div>
   </div>
 
@@ -172,8 +214,8 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
         <div class="amount-val"><span>USD </span><span id="amtDisplay">200</span></div>
         <div class="amount-lbl">Loan Amount</div>
       </div>
-      <input type="range" id="amtSlider" min="50" max="2000" step="10" value="200">
-      <div class="range-labels"><span>$50</span><span>$500</span><span>$1,000</span><span>$2,000</span></div>
+      <input type="range" id="amtSlider" min="50" max="3500" step="50" value="300">
+      <div class="range-labels"><span>$50</span><span>$500</span><span>$1,000</span><span>$3,500</span></div>
 
       <div class="period-row" id="periodRow">
         <button class="period-pill on" data-days="7" data-rate="0.15">7 days</button>
@@ -236,7 +278,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 
       <!-- EcoCash Number -->
       <div class="field">
-        <div class="field-lbl">EcoCash / Econet Number</div>
+        <div class="field-lbl"><span class="eco-blue">Eco</span><span class="eco-red">Cash</span> / Econet Number</div>
         <div class="field-wrap" id="fw-phone">
           <div class="field-pre">
             <img src="https://flagcdn.com/w20/zw.png" alt="ZW" onerror="this.style.display='none'">
@@ -321,7 +363,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
     Apply Now
   </button>
-  <div class="submit-note">⚡ Instant decision · Disbursed via EcoCash · No hidden fees</div>
+  <div class="submit-note">⚡ Instant decision · Disbursed via <span class="eco-blue">Eco</span><span class="eco-red">Cash</span> · No hidden fees</div>
 </div>
 
 <script>
@@ -335,7 +377,7 @@ function rip(btn,e){
 }
 
 // ─── CALCULATOR ──────────────────────────────────────────────────────────────
-var loanAmt=200,loanDays=7,loanRate=0.15;
+var loanAmt=300,loanDays=7,loanRate=0.15;
 var fmtUSD=function(n){return'$'+n.toFixed(2);};
 var fmtShort=function(n){return'$'+(n>=1000?(n/1000).toFixed(1)+'k':n.toFixed(0));};
 
