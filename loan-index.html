@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#006B3F">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="ZimCash — Zimbabwe instant loans via EcoCash. Borrow $50–$3,500. No bank account needed.">
 <title>ZimCash — Instant Loans Zimbabwe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,622 +18,740 @@ button{font-family:inherit;touch-action:manipulation;border:none;background:none
 input,select,textarea{font-family:inherit;border:none;outline:none;background:none}
 img{display:block}
 select{-webkit-appearance:none;appearance:none}
+*{-webkit-user-select:none;user-select:none}
 
 :root{
-  --grn:#006B3F;--grn2:#005432;--grn3:#004027;
+  --grn:#006B3F;--grn2:#005432;--grn3:#003D26;
   --grn-cont:#C8F0DC;--on-grn-cont:#002211;
-  --gold:#F5A000;--gold2:#D48800;--gold-cont:#FFF0CC;
+  --gold:#F5A000;--gold2:#D48800;--gold-lt:#FFF3D6;
   --bg:#F0F7F4;--surf:#FFFFFF;
   --surf-lo:#F0F7F4;--surf-mid:#E4F0EA;--surf-hi:#D4E8DC;
   --on-surf:#0A1F14;--on-surf-v:#2D4A38;
   --outline:#5A8070;--outline-v:#B8D4C4;
-  --err:#B3261E;
-  --r-sm:12px;--r-md:16px;--r-lg:24px;--r-xl:28px;--r-full:999px;
-  --sh1:0 1px 2px rgba(0,0,0,.06),0 2px 6px rgba(0,0,0,.06);
-  --sh-grn:0 2px 16px rgba(0,107,63,.28);
-  --sh-gold:0 2px 16px rgba(245,160,0,.28);
+  --err:#B3261E;--grn-ok:#16A34A;
+  --r-sm:10px;--r-md:16px;--r-lg:20px;--r-xl:24px;--r-full:999px;
+  --sh1:0 1px 3px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.06);
+  --sh-grn:0 2px 16px rgba(0,107,63,.25);
+  --sh-gold:0 2px 16px rgba(245,160,0,.30);
   --ease:cubic-bezier(.22,1,.36,1);
 }
 
-@keyframes pgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes pgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes ripple{to{transform:scale(4);opacity:0}}
-@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* NAV */
-.nav{flex-shrink:0;background:var(--grn);display:flex;align-items:center;justify-content:space-between;padding:0 18px;height:calc(56px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+/* ─── NAV ────────────────────────────────────── */
+.nav{
+  flex-shrink:0;
+  background:var(--grn);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 18px;
+  height:calc(56px + env(safe-area-inset-top,0px));
+  padding-top:env(safe-area-inset-top,0px);
+  box-shadow:0 2px 12px rgba(0,0,0,.18);
+  z-index:10;
+}
 .nav-brand{display:flex;align-items:center;gap:10px}
-.nav-icon{width:34px;height:34px;border-radius:10px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.nav-name{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px}
-.nav-name span{color:var(--gold)}
-.nav-badge{font-size:11px;font-weight:600;color:var(--grn);background:#fff;padding:3px 10px;border-radius:var(--r-full)}
+.nav-ic{width:34px;height:34px;border-radius:10px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-name{font-size:19px;font-weight:800;color:#fff;letter-spacing:-.4px}
+.nav-name em{color:var(--gold);font-style:normal}
+.nav-trust{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:4px 10px;border-radius:var(--r-full)}
+.nav-trust-dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;flex-shrink:0}
+.nav-trust-txt{font-size:11px;font-weight:600;color:#fff;letter-spacing:.3px}
 
-/* SCROLL */
-.scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;scrollbar-width:none;padding:0 0 calc(100px + env(safe-area-inset-bottom,0px));animation:pgIn .25s var(--ease) both}
+/* ─── SCROLL ─────────────────────────────────── */
+.scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;scrollbar-width:none;padding-bottom:calc(80px + env(safe-area-inset-bottom,0px));animation:pgIn .3s var(--ease) both}
 .scroll::-webkit-scrollbar{display:none}
 
-/* HERO BANNER */
-.hero-section{
+/* ─── HERO ───────────────────────────────────── */
+.hero{position:relative;overflow:hidden;min-height:360px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-img-wrap{position:absolute;inset:0}
+.hero-img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,40,20,.45) 0%,rgba(0,50,25,.72) 50%,rgba(0,40,20,.92) 100%)}
+.hero-body{position:relative;z-index:1;padding:20px 18px 24px}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(245,160,0,.18);border:1px solid rgba(245,160,0,.35);color:var(--gold);font-size:11px;font-weight:700;padding:4px 12px;border-radius:var(--r-full);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.hero-title{font-size:30px;font-weight:800;color:#fff;letter-spacing:-.6px;line-height:1.15;margin-bottom:8px}
+.hero-title em{font-style:normal;color:var(--gold)}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.78);line-height:1.6;max-width:320px;margin-bottom:16px}
+.hero-bullets{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.hero-bullet{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.88);font-weight:500}
+.hero-bullet-ic{width:20px;height:20px;border-radius:50%;background:rgba(74,222,128,.18);border:1px solid rgba(74,222,128,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr 1fr;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:var(--r-lg);padding:12px 0}
+.hs-item{text-align:center;position:relative}
+.hs-item+.hs-item::before{content:'';position:absolute;left:0;top:10%;height:80%;width:1px;background:rgba(255,255,255,.2)}
+.hs-val{font-size:19px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.hs-lbl{font-size:10px;color:rgba(255,255,255,.55);margin-top:3px;font-weight:500;letter-spacing:.3px;text-transform:uppercase}
+
+/* ─── SECTION ────────────────────────────────── */
+.section{padding:20px 16px 0}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.section-ic{width:36px;height:36px;border-radius:var(--r-md);background:var(--grn-cont);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.section-title{font-size:17px;font-weight:700;color:var(--on-surf)}
+.section-sub{font-size:12px;color:var(--on-surf-v);margin-top:1px}
+
+/* ─── AMOUNT GRID ────────────────────────────── */
+.amount-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:12px}
+.amt-btn{
+  padding:14px 8px;
+  border-radius:var(--r-md);
+  background:var(--surf);
+  border:1.5px solid var(--outline-v);
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  cursor:pointer;
+  transition:all .15s;
   position:relative;overflow:hidden;
-  /* Tall enough to show woman full body + calculator */
+  box-shadow:var(--sh1);
 }
-.hero-content{
-  position:relative;z-index:1;
-  padding:28px 18px 20px;
-}
-.hero-lbl{font-size:11px;font-weight:700;color:rgba(255,255,255,.65);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
-.hero-title{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px;line-height:1.25;margin-bottom:6px}
-.hero-sub{font-size:13px;color:rgba(255,255,255,.75);line-height:1.65;max-width:300px}
-.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.hero-pill{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:12px;font-weight:500;padding:5px 12px;border-radius:var(--r-full);display:inline-flex;align-items:center;gap:5px}
+.amt-btn:active{transform:scale(.96)}
+.amt-btn.on{border-color:var(--grn);background:var(--grn-cont);box-shadow:0 0 0 2px var(--grn),var(--sh1)}
+.amt-btn-val{font-size:18px;font-weight:800;color:var(--grn);letter-spacing:-.3px}
+.amt-btn.on .amt-btn-val{color:var(--on-grn-cont)}
+.amt-btn-lbl{font-size:9px;font-weight:600;color:var(--on-surf-v);letter-spacing:.4px;text-transform:uppercase}
+.amt-btn.on .amt-btn-lbl{color:var(--on-grn-cont);opacity:.7}
+.amt-btn-badge{position:absolute;top:5px;right:5px;font-size:8px;font-weight:700;color:var(--gold2);background:var(--gold-lt);padding:2px 6px;border-radius:var(--r-full);letter-spacing:.3px}
 
-
-/* Hero image */
-.hero{position:relative;overflow:hidden}
-.hero-img-wrap{
-  position:absolute;inset:0;z-index:0;
-  width:100%;height:100%;
-}
-.hero-img{
-  width:100%;height:100%;
-  display:block;
-  object-fit:cover;
-  object-position:center center;
-}
-.hero-img-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(160deg,rgba(0,50,28,.78) 0%,rgba(0,80,40,.65) 50%,rgba(0,30,15,.55) 100%);
-}
-.hero-content{position:relative;z-index:1}
-.hero-title-accent{color:var(--gold)}
-.hero-stats{display:flex;align-items:center;gap:0;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:var(--r-md);padding:12px 0;margin:14px 0 10px}
-.hero-stat{flex:1;text-align:center}
-.hero-stat-val{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px}
-.hero-stat-lbl{font-size:10px;color:rgba(255,255,255,.6);margin-top:2px;font-weight:500;letter-spacing:.3px}
-.hero-stat-sep{width:1px;height:32px;background:rgba(255,255,255,.2)}
-
-/* CALCULATOR CARD */
-.calc-inset{
-  position:relative;z-index:1;
-  margin:0 14px 14px;
-  background:rgba(255,255,255,.12);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,.2);
-  border-radius:var(--r-xl);
+/* Custom amount field */
+.custom-field{
+  display:flex;align-items:center;
+  background:var(--surf);
+  border:1.5px solid var(--outline-v);
+  border-radius:var(--r-md);
+  height:52px;
   overflow:hidden;
+  transition:border-color .18s,box-shadow .18s;
+  box-shadow:var(--sh1);
 }
-.calc-head{background:rgba(0,0,0,.2);padding:14px 18px;display:flex;align-items:center;gap:10px}
-.calc-head-ic{width:32px;height:32px;border-radius:var(--r-full);background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.calc-head-t{font-size:15px;font-weight:700;color:#fff}
-.calc-head-s{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px}
-.calc-body{padding:16px 18px 18px}
+.custom-field.focus{border-color:var(--grn);box-shadow:0 0 0 2px rgba(0,107,63,.15)}
+.custom-field.on{border-color:var(--grn);box-shadow:0 0 0 2px var(--grn)}
+.custom-pre{padding:0 14px;font-size:15px;font-weight:700;color:var(--on-surf-v);border-right:1.5px solid var(--outline-v);height:100%;display:flex;align-items:center;background:var(--surf-mid);flex-shrink:0}
+.custom-input{flex:1;height:100%;padding:0 14px;font-size:18px;font-weight:700;color:var(--on-surf);caret-color:var(--grn);background:transparent;-webkit-user-select:text!important;user-select:text!important}
+.custom-input::placeholder{font-size:14px;font-weight:400;color:var(--outline);font-family:'DM Sans',sans-serif}
+.custom-hint{font-size:11px;color:var(--on-surf-v);margin-top:6px}
 
-/* Amount slider */
-.amount-display{text-align:center;margin-bottom:16px}
-.amount-val{font-size:44px;font-weight:800;color:#fff;letter-spacing:-1.5px;font-feature-settings:'tnum';line-height:1}
-.amount-val span{font-size:22px;font-weight:600;color:rgba(255,255,255,.7)}
-.amount-lbl{font-size:12px;color:rgba(255,255,255,.6);margin-top:4px}
+/* ─── PERIOD ─────────────────────────────────── */
+.period-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.per-btn{
+  padding:11px 6px;
+  border-radius:var(--r-md);
+  background:var(--surf);
+  border:1.5px solid var(--outline-v);
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  cursor:pointer;transition:all .15s;
+  box-shadow:var(--sh1);
+  position:relative;overflow:hidden;
+}
+.per-btn:active{transform:scale(.95)}
+.per-btn.on{border-color:var(--grn);background:var(--grn-cont);box-shadow:0 0 0 2px var(--grn)}
+.per-btn-days{font-size:15px;font-weight:800;color:var(--grn)}
+.per-btn.on .per-btn-days{color:var(--on-grn-cont)}
+.per-btn-lbl{font-size:9px;color:var(--on-surf-v);font-weight:500;letter-spacing:.2px}
+.per-btn.on .per-btn-lbl{color:var(--on-grn-cont);opacity:.7}
 
-input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:3px;background:rgba(255,255,255,.25);outline:none;margin:6px 0}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--grn);box-shadow:0 2px 8px rgba(0,107,63,.35);cursor:pointer;border:3px solid #fff}
-input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--grn);box-shadow:0 2px 8px rgba(0,107,63,.35);cursor:pointer;border:3px solid #fff}
-.range-labels{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.55);margin-top:4px}
+/* ─── REPAYMENT CARD ─────────────────────────── */
+.repay-card{
+  margin:14px 0 0;
+  background:linear-gradient(135deg,var(--grn) 0%,var(--grn2) 100%);
+  border-radius:var(--r-xl);
+  padding:16px 18px;
+  box-shadow:var(--sh-grn);
+  position:relative;overflow:hidden;
+}
+.repay-card::before{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none}
+.repay-row{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.repay-main{}
+.repay-lbl{font-size:11px;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.repay-val{font-size:36px;font-weight:800;color:#fff;letter-spacing:-1px;line-height:1;font-feature-settings:'tnum'}
+.repay-period{font-size:13px;color:rgba(255,255,255,.65);margin-top:4px}
+.repay-breakdown{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  border-radius:var(--r-md);padding:10px 14px;
+  display:flex;gap:0;position:relative;z-index:1;margin-top:12px;
+}
+.rb-item{flex:1;text-align:center;position:relative}
+.rb-item+.rb-item::before{content:'';position:absolute;left:0;top:5%;height:90%;width:1px;background:rgba(255,255,255,.2)}
+.rb-val{font-size:14px;font-weight:700;color:#fff;font-feature-settings:'tnum'}
+.rb-lbl{font-size:10px;color:rgba(255,255,255,.55);margin-top:2px;letter-spacing:.3px}
 
-/* Period pills */
-.period-row{display:flex;gap:7px;flex-wrap:nowrap;margin-top:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
-.period-row::-webkit-scrollbar{display:none}
-.period-pill{flex-shrink:0;height:36px;padding:0 14px;border-radius:var(--r-full);border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap}
-.period-pill.on{border-color:var(--gold);background:var(--gold);color:#0A1F14;font-weight:700}
-
-/* Summary row */
-.calc-summary{margin-top:16px;background:rgba(0,0,0,.2);border-radius:var(--r-md);padding:14px 16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.cs-item{text-align:center}
-.cs-val{font-size:15px;font-weight:700;color:var(--gold);font-feature-settings:'tnum'}
-.cs-lbl{font-size:10px;color:rgba(255,255,255,.55);margin-top:2px;letter-spacing:.3px}
-
-/* FORM */
-.form-section{margin:14px 14px 0;background:var(--surf);border-radius:var(--r-xl);box-shadow:var(--sh1);overflow:hidden}
-.form-head{padding:14px 18px;border-bottom:1px solid var(--outline-v);display:flex;align-items:center;gap:10px}
-.form-head-ic{width:32px;height:32px;border-radius:var(--r-full);background:var(--grn-cont);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.form-head-t{font-size:15px;font-weight:700;color:var(--on-surf)}
-.form-body{padding:16px 18px;display:flex;flex-direction:column;gap:14px}
+/* ─── FORM ───────────────────────────────────── */
+.form-card{background:var(--surf);border-radius:var(--r-xl);box-shadow:var(--sh1);overflow:hidden;margin-top:14px}
+.form-card-head{background:var(--grn);padding:14px 18px;display:flex;align-items:center;gap:10px}
+.form-card-ic{width:32px;height:32px;border-radius:var(--r-full);background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.form-card-title{font-size:15px;font-weight:700;color:#fff}
+.form-card-sub{font-size:11px;color:rgba(255,255,255,.65);margin-top:1px}
+.form-body{padding:16px 16px 20px;display:flex;flex-direction:column;gap:14px}
 
 /* Field */
 .field{display:flex;flex-direction:column;gap:5px}
-.field-lbl{font-size:11px;font-weight:600;color:var(--on-surf-v);letter-spacing:.4px;text-transform:uppercase}
+.field-lbl{font-size:11px;font-weight:700;color:var(--on-surf-v);letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:4px}
+.req{color:var(--err);font-size:13px;line-height:1}
 .field-wrap{display:flex;align-items:center;background:var(--surf-mid);border-radius:var(--r-sm) var(--r-sm) 0 0;border-bottom:2px solid var(--outline);height:52px;transition:border-color .18s;position:relative}
 .field-wrap.focus{border-bottom-color:var(--grn)}
+.field-wrap.ok{border-bottom-color:var(--grn-ok)}
 .field-wrap.err{border-bottom-color:var(--err)}
-.field-wrap.ok{border-bottom-color:#16A34A}
-.field-ic{width:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--outline)}
+.field-ic{width:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--outline)}
+.field-ic.ok{color:var(--grn-ok)}
 .field-input{flex:1;min-width:0;height:100%;padding:0 14px 0 0;font-size:15px;color:var(--on-surf);background:transparent;caret-color:var(--grn);-webkit-user-select:text!important;user-select:text!important}
-.field-input::placeholder{color:var(--outline);font-size:14px}
-.field-err{font-size:11px;color:var(--err);font-weight:500;min-height:16px}
-
-/* Select field */
+.field-input::placeholder{color:var(--outline);font-size:13px}
 .field-select{flex:1;min-width:0;height:100%;padding:0 36px 0 0;font-size:15px;color:var(--on-surf);background:transparent;cursor:pointer}
-.field-select option{background:#fff;color:var(--on-surf)}
-.field-sel-arr{position:absolute;right:12px;pointer-events:none;color:var(--outline)}
-
-/* Phone prefix */
-.field-pre{display:flex;align-items:center;gap:6px;padding:0 10px 0 14px;border-right:1px solid var(--outline-v);height:100%;flex-shrink:0}
+.field-select option{background:#fff}
+.field-arr{position:absolute;right:12px;pointer-events:none;color:var(--outline)}
+.field-pre{display:flex;align-items:center;gap:7px;padding:0 10px 0 14px;border-right:1px solid var(--outline-v);height:100%;flex-shrink:0}
 .field-pre img{height:15px;border-radius:2px}
-.field-pre-code{font-size:14px;font-weight:600;color:var(--on-surf-v);font-family:'DM Mono',monospace}
+.field-pre-code{font-size:14px;font-weight:700;color:var(--on-surf-v);font-family:'DM Mono',monospace}
+.field-err{font-size:11px;color:var(--err);font-weight:600;min-height:17px;padding-top:2px}
 
-/* FOOT */
-.foot{flex-shrink:0;background:var(--surf);border-top:1px solid var(--outline-v);padding:12px 16px max(16px,env(safe-area-inset-bottom,0px));box-shadow:0 -2px 12px rgba(0,0,0,.07)}
-.submit-btn{width:100%;height:52px;border-radius:var(--r-full);background:var(--gold);color:#0A1F14;font-size:15px;font-weight:800;letter-spacing:.2px;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:var(--sh-gold);position:relative;overflow:hidden;transition:transform .12s,background .12s,box-shadow .12s;font-family:'DM Sans',sans-serif}
-.submit-btn:active{transform:scale(.97);background:var(--gold2);box-shadow:none}
-.submit-btn:disabled{background:var(--surf-hi);color:var(--outline);box-shadow:none}
-.submit-note{text-align:center;font-size:11px;color:var(--on-surf-v);margin-top:7px;line-height:1.5}
+/* Terms */
+.terms-row{display:flex;align-items:flex-start;gap:11px;cursor:pointer;padding:2px 0}
+.cb-wrap{position:relative;flex-shrink:0;margin-top:2px}
+.cb-wrap input{position:absolute;opacity:0;width:0;height:0}
+.cb-box{width:20px;height:20px;border-radius:5px;border:2px solid var(--outline-v);background:var(--surf-mid);display:flex;align-items:center;justify-content:center;transition:all .15s}
+.terms-txt{font-size:12px;color:var(--on-surf-v);line-height:1.55}
+.terms-link{color:var(--grn);font-weight:600}
 
-.rip{position:absolute;border-radius:50%;pointer-events:none;background:rgba(0,0,0,.09);transform:scale(0);animation:ripple .5s ease forwards}
+/* Trust badges */
+.trust-row{display:flex;flex-wrap:wrap;gap:8px;padding:16px 16px 0}
+.trust-item{display:flex;align-items:center;gap:6px;background:var(--surf);border:1px solid var(--outline-v);border-radius:var(--r-full);padding:5px 12px;box-shadow:var(--sh1)}
+.trust-item-ic{color:var(--grn);flex-shrink:0}
+.trust-item-txt{font-size:11px;font-weight:600;color:var(--on-surf-v)}
 
-/* EcoCash brand text coloring */
-/* Default: on white/light backgrounds */
+/* Why ZimCash */
+.why-card{background:var(--surf);border-radius:var(--r-xl);box-shadow:var(--sh1);overflow:hidden;margin-top:14px}
+.why-head{padding:16px 18px;border-bottom:1px solid var(--outline-v)}
+.why-title{font-size:16px;font-weight:700;color:var(--on-surf)}
+.why-items{display:flex;flex-direction:column}
+.why-item{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border-bottom:1px solid var(--outline-v)}
+.why-item:last-child{border-bottom:none}
+.why-ic{width:38px;height:38px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.why-item-title{font-size:14px;font-weight:700;color:var(--on-surf);margin-bottom:3px}
+.why-item-body{font-size:12px;color:var(--on-surf-v);line-height:1.55}
+
+/* Testimonials */
+.testi-row{display:flex;gap:10px;overflow-x:auto;padding:0 16px 4px;scrollbar-width:none;margin-top:14px}
+.testi-row::-webkit-scrollbar{display:none}
+.testi-card{flex-shrink:0;width:220px;background:var(--surf);border:1px solid var(--outline-v);border-radius:var(--r-lg);padding:14px;box-shadow:var(--sh1)}
+.testi-stars{color:var(--gold);font-size:13px;margin-bottom:6px;letter-spacing:1px}
+.testi-text{font-size:12px;color:var(--on-surf-v);line-height:1.6;margin-bottom:10px}
+.testi-name{font-size:12px;font-weight:700;color:var(--on-surf)}
+.testi-loc{font-size:11px;color:var(--outline)}
+
+/* ─── FOOT ────────────────────────────────────── */
+.foot{flex-shrink:0;background:var(--surf);border-top:1px solid var(--outline-v);padding:10px 16px max(14px,env(safe-area-inset-bottom,0px));box-shadow:0 -2px 12px rgba(0,0,0,.08)}
+.apply-btn{width:100%;height:52px;border-radius:var(--r-full);background:var(--gold);color:#0A1F14;font-size:15px;font-weight:800;letter-spacing:.2px;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:var(--sh-gold);position:relative;overflow:hidden;transition:transform .12s,background .12s,box-shadow .12s;font-family:'DM Sans',sans-serif}
+.apply-btn:active{transform:scale(.97);background:var(--gold2);box-shadow:none}
+.apply-btn.dim{background:var(--surf-hi);color:var(--outline);box-shadow:none}
+.apply-note{text-align:center;font-size:11px;color:var(--on-surf-v);margin-top:6px;line-height:1.5}
 .eco-blue{color:#0057B8;font-weight:700}
 .eco-red{color:#CC0000;font-weight:700}
-/* On dark/green hero background — readable tints */
-.hero .eco-blue{color:#60B8FF}
-.hero .eco-red{color:#FF8080}
 
-.submit-btn.not-ready{background:var(--surf-hi);color:var(--outline);box-shadow:none}
-.submit-btn.not-ready:active{background:var(--surf-hi);transform:none}
+.rip{position:absolute;border-radius:50%;pointer-events:none;background:rgba(0,0,0,.08);transform:scale(0);animation:ripple .5s ease forwards}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-brand">
-    <div class="nav-icon">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A1F14" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    <div class="nav-ic">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A1F14" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
     </div>
-    <span class="nav-name">Zim<span>Cash</span></span>
+    <span class="nav-name">Zim<em>Cash</em></span>
   </div>
-  <div class="nav-badge">Instant Loans</div>
+  <div class="nav-trust">
+    <div class="nav-trust-dot"></div>
+    <span class="nav-trust-txt">Live &amp; Secure</span>
+  </div>
 </nav>
 
-<div class="scroll" id="mainScroll">
+<div class="scroll">
 
-  <!-- HERO + CALCULATOR (shared background) -->
-  <div class="hero-section">
-    <!-- Background image spans the full section -->
+  <!-- ── HERO ─────────────────────────────────── -->
+  <div class="hero">
     <div class="hero-img-wrap">
-      <img class="hero-img" src="https://images.unsplash.com/photo-1662831328199-eb872a4ced96?w=1200&q=85&auto=format&fit=crop" alt="Woman smiling at phone" onerror="this.style.display='none'">
-      <div class="hero-img-overlay"></div>
+      <img class="hero-img"
+        src="https://images.unsplash.com/photo-1662831328199-eb872a4ced96?w=900&q=85&auto=format&fit=crop"
+        alt="Harare Zimbabwe"
+        onerror="this.style.display='none'">
+      <div class="hero-overlay"></div>
     </div>
-
-    <!-- Hero text -->
-    <div class="hero-content">
-      <div class="hero-lbl">Zimbabwe's Fastest Loan</div>
-      <div class="hero-title">Cash in your<br><span class="eco-blue">Eco</span><span class="eco-red">Cash</span> wallet<br><span class="hero-title-accent">in minutes</span></div>
-      <div class="hero-sub">No bank account needed. Apply in 2 minutes, authorize with your <span class="eco-blue">Eco</span><span class="eco-red">Cash</span> PIN, and receive funds instantly — 24/7.</div>
+    <div class="hero-body">
+      <div class="hero-tag">
+        <span>⚡</span> Zimbabwe&rsquo;s Fastest Loan
+      </div>
+      <div class="hero-title">Get cash straight<br>to your <em>EcoCash</em><br>— right now</div>
+      <div class="hero-sub">School fees due? Stock needed? Emergency? ZimCash sends money directly to your EcoCash wallet in minutes. No bank. No queue. No hassle.</div>
+      <div class="hero-bullets">
+        <div class="hero-bullet">
+          <div class="hero-bullet-ic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L9.5 17.5 20 7"/></svg></div>
+          Apply in under 2 minutes — any time, 24/7
+        </div>
+        <div class="hero-bullet">
+          <div class="hero-bullet-ic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L9.5 17.5 20 7"/></svg></div>
+          No bank account · No salary slip · No collateral
+        </div>
+        <div class="hero-bullet">
+          <div class="hero-bullet-ic"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L9.5 17.5 20 7"/></svg></div>
+          Funds in your wallet before you finish your tea
+        </div>
+      </div>
       <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-val">$50</div>
-          <div class="hero-stat-lbl">Minimum</div>
-        </div>
-        <div class="hero-stat-sep"></div>
-        <div class="hero-stat">
-          <div class="hero-stat-val">$3,500</div>
-          <div class="hero-stat-lbl">Maximum</div>
-        </div>
-        <div class="hero-stat-sep"></div>
-        <div class="hero-stat">
-          <div class="hero-stat-val">2 min</div>
-          <div class="hero-stat-lbl">To Apply</div>
-        </div>
+        <div class="hs-item"><div class="hs-val">$50</div><div class="hs-lbl">From</div></div>
+        <div class="hs-item"><div class="hs-val">$3,500</div><div class="hs-lbl">Up to</div></div>
+        <div class="hs-item"><div class="hs-val">2 min</div><div class="hs-lbl">To apply</div></div>
       </div>
-      <div class="hero-pills">
-        <span class="hero-pill">⚡ Instant</span>
-        <span class="hero-pill hero-pill-eco"><img src="assets/ecocash.png" alt="EcoCash" style="height:18px;width:auto;background:#fff;padding:2px 8px;border-radius:5px;display:block"></span>
-        <span class="hero-pill">✓ No Paperwork</span>
-        <span class="hero-pill">🔒 Secure</span>
+    </div>
+  </div>
+
+  <!-- ── HOW MUCH DO YOU NEED? ─────────────────── -->
+  <div class="section" style="padding-bottom:0">
+    <div class="section-head">
+      <div class="section-ic">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--grn)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <div>
+        <div class="section-title">How much do you need?</div>
+        <div class="section-sub">Tap an amount or type your own below</div>
       </div>
     </div>
 
-    <!-- Calculator sits inside the same image section -->
-    <div class="calc-inset">
-      <div class="calc-head">
-        <div class="calc-head-ic">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+    <!-- Preset amounts -->
+    <div class="amount-grid" id="amtGrid">
+      <button class="amt-btn" data-amt="50"><span class="amt-btn-val">$50</span><span class="amt-btn-lbl">Quick</span></button>
+      <button class="amt-btn" data-amt="100"><span class="amt-btn-val">$100</span><span class="amt-btn-lbl">Popular</span></button>
+      <button class="amt-btn" data-amt="200"><span class="amt-btn-val">$200</span><span class="amt-btn-lbl">Popular</span><span class="amt-btn-badge">★ Top</span></button>
+      <button class="amt-btn" data-amt="500"><span class="amt-btn-val">$500</span><span class="amt-btn-lbl">Business</span></button>
+      <button class="amt-btn" data-amt="1000"><span class="amt-btn-val">$1,000</span><span class="amt-btn-lbl">Business</span></button>
+      <button class="amt-btn" data-amt="2000"><span class="amt-btn-val">$2,000</span><span class="amt-btn-lbl">Growth</span></button>
+    </div>
+
+    <!-- Custom amount -->
+    <div class="custom-field" id="customField">
+      <div class="custom-pre">USD</div>
+      <input class="custom-input" id="customAmt" type="tel" inputmode="decimal" placeholder="Enter custom amount (50–3,500)" maxlength="6">
+    </div>
+    <div class="custom-hint" id="customHint">Minimum $50 &middot; Maximum $3,500</div>
+  </div>
+
+  <!-- ── REPAYMENT PERIOD ───────────────────────── -->
+  <div class="section" style="padding-bottom:0">
+    <div class="section-head" style="margin-bottom:10px">
+      <div class="section-ic">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--grn)" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <div>
+        <div class="section-title">Repayment period</div>
+        <div class="section-sub">Choose when you&rsquo;ll pay back</div>
+      </div>
+    </div>
+    <div class="period-grid" id="periodGrid">
+      <button class="per-btn on" data-days="7" data-rate="0.08"><span class="per-btn-days">7</span><span class="per-btn-lbl">days</span></button>
+      <button class="per-btn" data-days="14" data-rate="0.10"><span class="per-btn-days">14</span><span class="per-btn-lbl">days</span></button>
+      <button class="per-btn" data-days="30" data-rate="0.12"><span class="per-btn-days">30</span><span class="per-btn-lbl">days</span></button>
+      <button class="per-btn" data-days="60" data-rate="0.15"><span class="per-btn-days">60</span><span class="per-btn-lbl">days</span></button>
+      <button class="per-btn" data-days="90" data-rate="0.18"><span class="per-btn-days">90</span><span class="per-btn-lbl">days</span></button>
+    </div>
+
+    <!-- Live repayment summary -->
+    <div class="repay-card">
+      <div class="repay-row">
+        <div class="repay-main">
+          <div class="repay-lbl">You repay</div>
+          <div class="repay-val" id="repayTotal">USD 54.00</div>
+          <div class="repay-period" id="repayPeriod">in 7 days (8% flat rate)</div>
+        </div>
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <div class="repay-breakdown">
+        <div class="rb-item"><div class="rb-val" id="rbAmt">$50</div><div class="rb-lbl">Loan</div></div>
+        <div class="rb-item"><div class="rb-val" id="rbInterest">$4.00</div><div class="rb-lbl">Interest</div></div>
+        <div class="rb-item"><div class="rb-val" id="rbTotal">$54.00</div><div class="rb-lbl">Total</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── APPLICATION FORM ───────────────────────── -->
+  <div class="section" style="padding-bottom:0">
+    <div class="section-head">
+      <div class="section-ic">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--grn)" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div>
+        <div class="section-title">Your details</div>
+        <div class="section-sub">We only ask what we need</div>
+      </div>
+    </div>
+    <div class="form-card">
+      <div class="form-card-head">
+        <div class="form-card-ic">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <div>
-          <div class="calc-head-t">Loan Calculator</div>
-          <div class="calc-head-s">Drag to set your amount</div>
+          <div class="form-card-title">Personal Information</div>
+          <div class="form-card-sub">256-bit encrypted · Your data stays private</div>
         </div>
       </div>
-      <div class="calc-body">
-        <div class="amount-display">
-          <div class="amount-val"><span>USD </span><span id="amtDisplay">300</span></div>
-          <div class="amount-lbl">Loan Amount</div>
+      <div class="form-body">
+
+        <!-- Full Name -->
+        <div class="field">
+          <div class="field-lbl">Full Name <span class="req">*</span></div>
+          <div class="field-wrap" id="fw-name">
+            <div class="field-ic" id="fic-name">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <input class="field-input" id="f-name" type="text" inputmode="text" placeholder="e.g. Tendai Moyo" autocomplete="name">
+          </div>
+          <div class="field-err" id="err-name"></div>
         </div>
-        <input type="range" id="amtSlider" min="50" max="3500" step="50" value="300">
-        <div class="range-labels"><span>$50</span><span>$1,000</span><span>$2,500</span><span>$3,500</span></div>
-        <div class="period-row" id="periodRow">
-          <button class="period-pill on" data-days="7" data-rate="0.08">7 days</button>
-          <button class="period-pill" data-days="14" data-rate="0.10">14 days</button>
-          <button class="period-pill" data-days="30" data-rate="0.12">30 days</button>
-          <button class="period-pill" data-days="60" data-rate="0.15">60 days</button>
-          <button class="period-pill" data-days="90" data-rate="0.18">90 days</button>
+
+        <!-- National ID -->
+        <div class="field">
+          <div class="field-lbl">National ID <span class="req">*</span></div>
+          <div class="field-wrap" id="fw-id">
+            <div class="field-ic" id="fic-id">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 15h8"/></svg>
+            </div>
+            <input class="field-input" id="f-id" type="text" inputmode="text" placeholder="e.g. 63-123456 A25" autocomplete="off">
+          </div>
+          <div class="field-err" id="err-id"></div>
         </div>
-        <div class="calc-summary">
-          <div class="cs-item">
-            <div class="cs-val" id="csInterest">$45.00</div>
-            <div class="cs-lbl">Interest</div>
+
+        <!-- Phone -->
+        <div class="field">
+          <div class="field-lbl"><span class="eco-blue">Eco</span><span class="eco-red">Cash</span> Number <span class="req">*</span></div>
+          <div class="field-wrap" id="fw-phone">
+            <div class="field-pre">
+              <img src="https://flagcdn.com/w20/zw.png" alt="ZW" onerror="this.style.display='none'">
+              <span class="field-pre-code">+263</span>
+            </div>
+            <input class="field-input" id="f-phone" type="tel" inputmode="numeric" pattern="[0-9]*" placeholder="77 123 4567" maxlength="9" autocomplete="tel-national" style="padding-left:12px">
           </div>
-          <div class="cs-item">
-            <div class="cs-val" id="csTotal">$345.00</div>
-            <div class="cs-lbl">Total Repay</div>
+          <div class="field-err" id="err-phone"></div>
+        </div>
+
+        <!-- Employment -->
+        <div class="field">
+          <div class="field-lbl">Employment Status <span class="req">*</span></div>
+          <div class="field-wrap" id="fw-emp">
+            <div class="field-ic" id="fic-emp">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+            </div>
+            <select class="field-select" id="f-emp">
+              <option value="">Select your employment…</option>
+              <option value="employed">Employed — formal sector</option>
+              <option value="self">Self Employed / Business owner</option>
+              <option value="informal">Informal / Vendor / Kombi</option>
+              <option value="farmer">Farmer / Agriculture</option>
+              <option value="diaspora">Diaspora / Remittances</option>
+              <option value="student">Student</option>
+              <option value="retired">Retired / Pensioner</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="field-arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
           </div>
-          <div class="cs-item">
-            <div class="cs-val" id="csDue">7 days</div>
-            <div class="cs-lbl">Due Date</div>
+          <div class="field-err" id="err-emp"></div>
+        </div>
+
+        <!-- Purpose -->
+        <div class="field">
+          <div class="field-lbl">Loan Purpose <span class="req">*</span></div>
+          <div class="field-wrap" id="fw-purpose">
+            <div class="field-ic" id="fic-purpose">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <select class="field-select" id="f-purpose">
+              <option value="">What will you use it for?</option>
+              <option value="school">School Fees / ZIMSEC</option>
+              <option value="business">Business Stock / Restock</option>
+              <option value="medical">Medical / Pharmacy</option>
+              <option value="rent">Rent / Accommodation</option>
+              <option value="food">Food / Groceries</option>
+              <option value="transport">Transport / Commute</option>
+              <option value="home">Home Improvement</option>
+              <option value="agriculture">Seeds / Farming inputs</option>
+              <option value="emergency">Emergency</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="field-arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
           </div>
+          <div class="field-err" id="err-purpose"></div>
+        </div>
+
+        <!-- Terms -->
+        <label class="terms-row">
+          <div class="cb-wrap">
+            <input type="checkbox" id="f-terms">
+            <div id="cbBox" class="cb-box"></div>
+          </div>
+          <span class="terms-txt">I agree to the <span class="terms-link">Terms &amp; Conditions</span> and Privacy Policy. I authorise ZimCash to verify my identity and credit history via EcoCash.</span>
+        </label>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WHY ZIMCASH ─────────────────────────────── -->
+  <div class="section" style="padding-bottom:0">
+    <div class="why-card">
+      <div class="why-head">
+        <div class="why-title">Why Zimbabweans choose ZimCash</div>
+      </div>
+      <div class="why-items">
+        <div class="why-item">
+          <div class="why-ic" style="background:#E8F5E9"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#006B3F" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <div><div class="why-item-title">Instant — even at midnight</div><div class="why-item-body">Funds arrive in your EcoCash wallet within minutes, any hour of the day. Perfect when emergencies don't wait.</div></div>
+        </div>
+        <div class="why-item">
+          <div class="why-ic" style="background:#FFF8E1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5A000" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div class="why-item-title">No bank account needed</div><div class="why-item-body">All you need is your Econet number and EcoCash wallet. We serve the unbanked and underbanked across Zimbabwe.</div></div>
+        </div>
+        <div class="why-item">
+          <div class="why-ic" style="background:#E3F2FD"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0057B8" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div><div class="why-item-title">Transparent pricing</div><div class="why-item-body">Flat interest rate. No hidden charges. What you see is what you repay — no surprises on your EcoCash deduction.</div></div>
+        </div>
+        <div class="why-item">
+          <div class="why-ic" style="background:#F3E5F5"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7B1FA2" stroke-width="2.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div><div class="why-item-title">Built for Zimbabweans</div><div class="why-item-body">School fees, stock, medical bills — we understand the real cashflow challenges. ZimCash is made for you.</div></div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- ── TRUST BADGES ───────────────────────────── -->
+  <div class="trust-row">
+    <div class="trust-item"><div class="trust-item-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="trust-item-txt">256-bit Encrypted</span></div>
+    <div class="trust-item"><div class="trust-item-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><span class="trust-item-txt">RBZ Compliant</span></div>
+    <div class="trust-item"><div class="trust-item-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span class="trust-item-txt">24/7 Available</span></div>
+    <div class="trust-item"><div class="trust-item-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><span class="trust-item-txt">10,000+ Customers</span></div>
+  </div>
 
-  <!-- APPLICATION FORM -->
-  <div class="form-section" style="margin-bottom:0">
-    <div class="form-head">
-      <div class="form-head-ic">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--grn)" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+  <!-- ── TESTIMONIALS ───────────────────────────── -->
+  <div style="padding:14px 0 0">
+    <div style="padding:0 16px;margin-bottom:10px;font-size:15px;font-weight:700;color:var(--on-surf)">What our customers say</div>
+    <div class="testi-row">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Got $300 for school fees in 4 minutes. Mbiri yeZimCash! My daughter wrote her exams."</div>
+        <div class="testi-name">Chiedza M.</div>
+        <div class="testi-loc">Mbare, Harare</div>
       </div>
-      <div class="form-head-t">Personal Details</div>
-    </div>
-    <div class="form-body">
-
-      <!-- Full Name -->
-      <div class="field">
-        <div class="field-lbl">Full Name <span style="color:var(--err);font-weight:700">*</span></div>
-        <div class="field-wrap" id="fw-name">
-          <div class="field-ic">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <input class="field-input" id="f-name" type="text" inputmode="text" placeholder="e.g. Tendai Moyo" autocomplete="name">
-        </div>
-        <div class="field-err" id="err-name"></div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Ndaida mari yokutenga stock. ZimCash yandiitira manje manje. Ndoda nhasi ndione mangwana."</div>
+        <div class="testi-name">Takudzwa N.</div>
+        <div class="testi-loc">Kuwadzana, Harare</div>
       </div>
-
-      <!-- National ID -->
-      <div class="field">
-        <div class="field-lbl">National ID <span style="color:var(--err);font-weight:700">*</span></div>
-        <div class="field-wrap" id="fw-id">
-          <div class="field-ic">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 15h8"/></svg>
-          </div>
-          <input class="field-input" id="f-id" type="text" inputmode="text" placeholder="e.g. 63-123456 A25" autocomplete="off">
-        </div>
-        <div class="field-err" id="err-id"></div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Medical bill at Parirenyatwa. Called ZimCash at 11pm, money was there in minutes. Lifesaver!"</div>
+        <div class="testi-name">Rutendo K.</div>
+        <div class="testi-loc">Avondale, Harare</div>
       </div>
-
-      <!-- EcoCash Number -->
-      <div class="field">
-        <div class="field-lbl"><span class="eco-blue">Eco</span><span class="eco-red">Cash</span> / Econet Number <span style="color:var(--err);font-weight:700">*</span></div>
-        <div class="field-wrap" id="fw-phone">
-          <div class="field-pre">
-            <img src="https://flagcdn.com/w20/zw.png" alt="ZW" onerror="this.style.display='none'">
-            <span class="field-pre-code">+263</span>
-          </div>
-          <input class="field-input" id="f-phone" type="tel" inputmode="numeric" pattern="[0-9]*" placeholder="77 123 4567" maxlength="9" autocomplete="tel-national">
-        </div>
-        <div class="field-err" id="err-phone"></div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Ndakatengesa zvokudya kumarket. ZimCash yakandiita restock same day. Transparent rates."</div>
+        <div class="testi-name">Farai D.</div>
+        <div class="testi-loc">Mutare</div>
       </div>
-
-      <!-- Employment -->
-      <div class="field">
-        <div class="field-lbl">Employment Status <span style="color:var(--err);font-weight:700">*</span></div>
-        <div class="field-wrap" id="fw-emp">
-          <div class="field-ic">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-          </div>
-          <select class="field-select" id="f-emp">
-            <option value="">Select status…</option>
-            <option value="employed">Employed (Formal)</option>
-            <option value="self">Self Employed</option>
-            <option value="informal">Informal Trader</option>
-            <option value="farmer">Farmer</option>
-            <option value="student">Student</option>
-            <option value="other">Other</option>
-          </select>
-          <div class="field-sel-arr">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
-        </div>
-        <div class="field-err" id="err-emp"></div>
-      </div>
-
-      <!-- Loan Purpose -->
-      <div class="field">
-        <div class="field-lbl">Loan Purpose <span style="color:var(--err);font-weight:700">*</span></div>
-        <div class="field-wrap" id="fw-purpose">
-          <div class="field-ic">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          </div>
-          <select class="field-select" id="f-purpose">
-            <option value="">Select purpose…</option>
-            <option value="business">Business / Stock</option>
-            <option value="school">School Fees</option>
-            <option value="medical">Medical</option>
-            <option value="home">Home Improvement</option>
-            <option value="transport">Transport / Vehicle</option>
-            <option value="agriculture">Agriculture</option>
-            <option value="emergency">Emergency</option>
-            <option value="other">Other</option>
-          </select>
-          <div class="field-sel-arr">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
-        </div>
-        <div class="field-err" id="err-purpose"></div>
-      </div>
-
-      <!-- Terms checkbox -->
-      <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:4px 0">
-        <div style="position:relative;flex-shrink:0;margin-top:2px">
-          <input type="checkbox" id="f-terms" style="position:absolute;opacity:0;width:0;height:0">
-          <div id="checkbox-visual" style="width:20px;height:20px;border-radius:5px;border:2px solid var(--outline-v);background:var(--surf-mid);display:flex;align-items:center;justify-content:center;transition:all .15s"></div>
-        </div>
-        <span style="font-size:12px;color:var(--on-surf-v);line-height:1.55">I agree to the <span style="color:var(--grn);font-weight:600">Terms & Conditions</span> and authorise ZimCash to verify my identity and credit history.</span>
-      </label>
-
     </div>
   </div>
 
-  <!-- Trust strip -->
-  <div style="margin:10px 14px 0;padding:12px 16px;background:var(--surf);border-radius:var(--r-md);display:flex;align-items:center;gap:10px;box-shadow:var(--sh1)">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--grn)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    <span style="font-size:12px;color:var(--on-surf-v);line-height:1.5">Your data is encrypted and protected. ZimCash complies with Zimbabwe's Financial Intelligence Act.</span>
-  </div>
+  <div style="height:8px"></div>
 
 </div><!-- /scroll -->
 
 <!-- FOOT -->
 <div class="foot">
-  <button class="submit-btn" id="submitBtn">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-    Apply Now
+  <button class="apply-btn dim" id="applyBtn">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    Apply Now — Get Cash Fast
   </button>
-  <div class="submit-note">⚡ Instant decision · Disbursed via <span class="eco-blue">Eco</span><span class="eco-red">Cash</span> · No hidden fees</div>
+  <div class="apply-note">⚡ Instant disbursement · <span class="eco-blue">Eco</span><span class="eco-red">Cash</span> wallet · No hidden fees</div>
 </div>
 
 <script>
 'use strict';
 function hap(ms){try{navigator.vibrate&&navigator.vibrate(ms);}catch(e){}}
-function rip(btn,e){
-  var r=btn.getBoundingClientRect(),sz=Math.max(r.width,r.height)*2;
-  var s=document.createElement('span');s.className='rip';
-  s.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+(e.clientX-r.left-sz/2)+'px;top:'+(e.clientY-r.top-sz/2)+'px;position:absolute;';
-  btn.appendChild(s);s.addEventListener('animationend',function(){s.remove();});
+function rip(btn,e){var r=btn.getBoundingClientRect(),sz=Math.max(r.width,r.height)*2;var s=document.createElement('span');s.className='rip';s.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+(e.clientX-r.left-sz/2)+'px;top:'+(e.clientY-r.top-sz/2)+'px;position:absolute;';btn.appendChild(s);s.addEventListener('animationend',function(){s.remove();});}
+
+// ── STATE ──────────────────────────────────────────────────────────────────────
+var loanAmt=50,loanDays=7,loanRate=0.08,customActive=false;
+
+// ── AMOUNT BUTTONS ──────────────────────────────────────────────────────────────
+function setAmt(amt,fromCustom){
+  loanAmt=amt;customActive=!!fromCustom;
+  // Deselect all preset buttons
+  document.querySelectorAll('.amt-btn').forEach(function(b){b.classList.remove('on');});
+  if(!fromCustom){
+    // Highlight matching preset
+    var match=document.querySelector('.amt-btn[data-amt="'+amt+'"]');
+    if(match)match.classList.add('on');
+    // Clear custom field
+    document.getElementById('customAmt').value='';
+    document.getElementById('customField').classList.remove('on','focus');
+    document.getElementById('customHint').textContent='Minimum $50 \u00b7 Maximum $3,500';
+  } else {
+    document.getElementById('customField').classList.add('on');
+  }
+  calcUpdate();updateSubmitState();
 }
 
-// ─── CALCULATOR ──────────────────────────────────────────────────────────────
-var loanAmt=300,loanDays=7,loanRate=0.08;
-var fmtUSD=function(n){return'$'+n.toFixed(2);};
-var fmtShort=function(n){return'$'+(n>=1000?(n/1000).toFixed(1)+'k':n.toFixed(0));};
+document.getElementById('amtGrid').addEventListener('click',function(e){
+  var btn=e.target.closest('.amt-btn');if(!btn)return;
+  hap(8);rip(btn,e);
+  setAmt(parseInt(btn.dataset.amt),false);
+});
 
+// Custom amount
+var customEl=document.getElementById('customAmt');
+var customField=document.getElementById('customField');
+customEl.addEventListener('focus',function(){customField.classList.add('focus');});
+customEl.addEventListener('blur',function(){customField.classList.remove('focus');});
+customEl.addEventListener('input',function(){
+  var raw=this.value.replace(/[^0-9]/g,'');
+  this.value=raw;
+  var v=parseInt(raw)||0;
+  var hint=document.getElementById('customHint');
+  if(!raw){hint.textContent='Minimum $50 \u00b7 Maximum $3,500';hint.style.color='';customField.classList.remove('on');return;}
+  if(v<50){hint.textContent='Minimum loan is $50';hint.style.color='var(--err)';customField.classList.remove('on');}
+  else if(v>3500){hint.textContent='Maximum loan is $3,500';hint.style.color='var(--err)';customField.classList.remove('on');}
+  else{hint.textContent='\u2713 Amount set to USD '+v.toLocaleString();hint.style.color='var(--grn-ok)';setAmt(v,true);}
+});
+
+// Initialise default
+setAmt(50,false);
+
+// ── PERIOD ──────────────────────────────────────────────────────────────────────
+document.getElementById('periodGrid').addEventListener('click',function(e){
+  var btn=e.target.closest('.per-btn');if(!btn)return;
+  document.querySelectorAll('.per-btn').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  loanDays=parseInt(btn.dataset.days);loanRate=parseFloat(btn.dataset.rate);
+  calcUpdate();hap(8);rip(btn,e);
+});
+
+// ── CALCULATOR ─────────────────────────────────────────────────────────────────
+function fmtUSD(n){return'$'+n.toFixed(2);}
 function calcUpdate(){
-  var interest=loanAmt*loanRate;
-  var total=loanAmt+interest;
-  document.getElementById('amtDisplay').textContent=fmtShort(loanAmt).replace('$','');
-  document.querySelector('.amount-val span:first-child').textContent='USD ';
-  document.getElementById('csInterest').textContent=fmtUSD(interest);
-  document.getElementById('csTotal').textContent=fmtUSD(total);
-  document.getElementById('csDue').textContent=loanDays+' days';
+  var interest=parseFloat((loanAmt*loanRate).toFixed(2));
+  var total=parseFloat((loanAmt+interest).toFixed(2));
+  document.getElementById('repayTotal').textContent='USD '+total.toFixed(2);
+  document.getElementById('repayPeriod').textContent='in '+loanDays+' days ('+Math.round(loanRate*100)+'% flat rate)';
+  document.getElementById('rbAmt').textContent=fmtUSD(loanAmt);
+  document.getElementById('rbInterest').textContent=fmtUSD(interest);
+  document.getElementById('rbTotal').textContent=fmtUSD(total);
 }
-
-document.getElementById('amtSlider').addEventListener('input',function(){
-  loanAmt=parseInt(this.value);
-  document.getElementById('amtDisplay').textContent=loanAmt>=1000?(loanAmt/1000).toFixed(loanAmt%1000===0?0:1)+'k':loanAmt;
-  calcUpdate();hap(4);
-});
-
-document.getElementById('periodRow').addEventListener('click',function(e){
-  var pill=e.target.closest('.period-pill');if(!pill)return;
-  document.querySelectorAll('.period-pill').forEach(function(p){p.classList.remove('on');});
-  pill.classList.add('on');
-  loanDays=parseInt(pill.dataset.days);
-  loanRate=parseFloat(pill.dataset.rate);
-  calcUpdate();hap(8);
-});
-
 calcUpdate();
 
-// ─── FORM VALIDATION ─────────────────────────────────────────────────────────
+// ── VALIDATION ─────────────────────────────────────────────────────────────────
 var touched={};
-function setFocus(id,on){
-  var fw=document.getElementById('fw-'+id);
-  if(!fw)return;
-  fw.classList.toggle('focus',on);
-}
-function setOk(id){
-  var fw=document.getElementById('fw-'+id);
-  if(fw){fw.classList.remove('focus','err');fw.classList.add('ok');}
-  var er=document.getElementById('err-'+id);
-  if(er)er.textContent='';
-}
-function setErr(id,msg){
-  var fw=document.getElementById('fw-'+id);
-  if(fw){fw.classList.remove('focus','ok');fw.classList.add('err');}
-  var er=document.getElementById('err-'+id);
-  if(er)er.textContent=msg;
-}
-function clearState(id){
-  var fw=document.getElementById('fw-'+id);
-  if(fw){fw.classList.remove('focus','ok','err');}
-  var er=document.getElementById('err-'+id);
-  if(er)er.textContent='';
-}
+function fw(id){return document.getElementById('fw-'+id);}
+function setOk(id){var f=fw(id);if(f){f.classList.remove('err','focus');f.classList.add('ok');}var e=document.getElementById('err-'+id);if(e)e.textContent='';var ic=document.getElementById('fic-'+id);if(ic)ic.classList.add('ok');}
+function setErr(id,msg){var f=fw(id);if(f){f.classList.remove('ok','focus');f.classList.add('err');}var e=document.getElementById('err-'+id);if(e)e.textContent=msg;var ic=document.getElementById('fic-'+id);if(ic)ic.classList.remove('ok');}
+function clr(id){var f=fw(id);if(f){f.classList.remove('ok','err','focus');}var e=document.getElementById('err-'+id);if(e)e.textContent='';}
 
-function validateName(v){
-  v=v.trim();
-  if(!v)return'Full name is required';
-  if(v.split(' ').filter(function(x){return x.length>0;}).length<2)return'Enter first and last name';
-  if(v.length<4)return'Name too short';
-  return'';
-}
-function validateID(v){
-  v=v.trim();
-  if(!v)return'National ID is required';
-  if(v.length<6)return'Enter a valid Zimbabwe national ID';
-  return'';
-}
-function validatePhone(v){
-  v=v.replace(/[^0-9]/g,'');
-  if(!v)return'EcoCash number is required';
-  if(v.length!==9)return'Enter 9-digit Econet number';
-  if(!v.match(/^(77|78|73|71|72)/))return'Must be an Econet number (077/078/073)';
-  return'';
-}
-function validateSelect(v,label){
-  if(!v)return label+' is required';
-  return'';
-}
+function vName(v){v=v.trim();if(!v)return'Full name is required';if(v.split(/\s+/).filter(Boolean).length<2)return'Enter first and last name';if(v.length<4)return'Name too short';return'';}
+function vId(v){v=v.trim();if(!v)return'National ID is required';if(v.length<6)return'Enter a valid Zimbabwe National ID';return'';}
+function vPhone(v){v=v.replace(/[^0-9]/g,'');if(!v)return'EcoCash number is required';if(v.length!==9)return'Enter your 9-digit Econet number';if(!/^(77|78|73|71|72)/.test(v))return'Must be Econet: 077 / 078 / 073';return'';}
+function vSel(v,lbl){if(!v)return lbl+' is required';return'';}
+function vAmount(){if(!loanAmt||loanAmt<50)return'Select or enter a loan amount';if(loanAmt>3500)return'Maximum is $3,500';return'';}
 
-var fields=['name','id','phone','emp','purpose'];
 function validateAll(){
-  var ok=true;
-  var nv=validateName(document.getElementById('f-name').value);
-  var iv=validateID(document.getElementById('f-id').value);
-  var pv=validatePhone(document.getElementById('f-phone').value);
-  var ev=validateSelect(document.getElementById('f-emp').value,'Employment status');
-  var purv=validateSelect(document.getElementById('f-purpose').value,'Loan purpose');
-  var termsOk=document.getElementById('f-terms').checked;
-  if(nv||iv||pv||ev||purv||!termsOk)ok=false;
-  return ok;
+  return !vName(document.getElementById('f-name').value)&&
+    !vId(document.getElementById('f-id').value)&&
+    !vPhone(document.getElementById('f-phone').value)&&
+    !vSel(document.getElementById('f-emp').value,'')&&
+    !vSel(document.getElementById('f-purpose').value,'')&&
+    !vAmount()&&
+    document.getElementById('f-terms').checked;
 }
-function checkSubmit(){
-  document.getElementById('submitBtn').disabled=!validateAll();
+function updateSubmitState(){
+  var btn=document.getElementById('applyBtn');
+  if(validateAll())btn.classList.remove('dim');else btn.classList.add('dim');
 }
 
-// Name
-var fnEl=document.getElementById('f-name');
-fnEl.addEventListener('focus',function(){setFocus('name',true);});
-fnEl.addEventListener('blur',function(){
-  touched.name=true;
-  var e=validateName(this.value);
-  if(e)setErr('name',e);else setOk('name');
-  updateSubmitState();
-});
-fnEl.addEventListener('input',function(){
-  if(touched.name){var e=validateName(this.value);if(e)setErr('name',e);else setOk('name');}
-  updateSubmitState();
-});
-
-// ID
-var idEl=document.getElementById('f-id');
-idEl.addEventListener('focus',function(){setFocus('id',true);});
-idEl.addEventListener('blur',function(){
-  touched.id=true;
-  var e=validateID(this.value);
-  if(e)setErr('id',e);else setOk('id');
-  updateSubmitState();
-});
-idEl.addEventListener('input',function(){
-  if(touched.id){var e=validateID(this.value);if(e)setErr('id',e);else setOk('id');}
-  updateSubmitState();
-});
-
-// Phone
-var phEl=document.getElementById('f-phone');
-phEl.addEventListener('focus',function(){setFocus('phone',true);});
-phEl.addEventListener('input',function(){
-  this.value=this.value.replace(/[^0-9]/g,'').slice(0,9);
-  if(touched.phone){var e=validatePhone(this.value);if(e)setErr('phone',e);else setOk('phone');}
-  updateSubmitState();
-});
-phEl.addEventListener('blur',function(){
-  touched.phone=true;
-  var e=validatePhone(this.value);
-  if(e)setErr('phone',e);else setOk('phone');
-  updateSubmitState();
-});
-
-// Employment & purpose
+// Wire fields
+function wireField(id,vFn,label){
+  var input=document.getElementById('f-'+id);
+  if(!input)return;
+  input.addEventListener('focus',function(){var f=fw(id);if(f&&!f.classList.contains('err')&&!f.classList.contains('ok'))f.classList.add('focus');});
+  input.addEventListener('blur',function(){
+    touched[id]=true;
+    var err=vFn(this.value,label);
+    if(err)setErr(id,err);else setOk(id);
+    updateSubmitState();
+    var f=fw(id);if(f)f.classList.remove('focus');
+  });
+  input.addEventListener('input',function(){
+    if(id==='phone')this.value=this.value.replace(/[^0-9]/g,'').slice(0,9);
+    if(touched[id]){var err=vFn(this.value,label);if(err)setErr(id,err);else setOk(id);}
+    updateSubmitState();
+  });
+}
+wireField('name',vName,'Full name');
+wireField('id',vId,'National ID');
+wireField('phone',vPhone,'Phone');
 ['emp','purpose'].forEach(function(id){
   document.getElementById('f-'+id).addEventListener('change',function(){
     touched[id]=true;
-    var label=id==='emp'?'Employment status':'Loan purpose';
-    var e=validateSelect(this.value,label);
-    if(e)setErr(id,e);else setOk(id);
+    var lbl=id==='emp'?'Employment':'Loan purpose';
+    var err=vSel(this.value,lbl);
+    if(err)setErr(id,err);else setOk(id);
     updateSubmitState();
   });
 });
 
-// Terms checkbox
-var termsEl=document.getElementById('f-terms');
-var cbVis=document.getElementById('checkbox-visual');
+// Terms
+var termsEl=document.getElementById('f-terms'),cbBox=document.getElementById('cbBox');
 termsEl.addEventListener('change',function(){
-  if(this.checked){
-    cbVis.style.background='var(--grn)';
-    cbVis.style.borderColor='var(--grn)';
-    cbVis.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L9.5 17.5 20 7"/></svg>';
-  } else {
-    cbVis.style.background='var(--surf-mid)';
-    cbVis.style.borderColor='var(--outline-v)';
-    cbVis.innerHTML='';
-  }
+  if(this.checked){cbBox.style.background='var(--grn)';cbBox.style.borderColor='var(--grn)';cbBox.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L9.5 17.5 20 7"/></svg>';}
+  else{cbBox.style.background='var(--surf-mid)';cbBox.style.borderColor='var(--outline-v)';cbBox.innerHTML='';}
   updateSubmitState();
 });
 
-// ─── SUBMIT ───────────────────────────────────────────────────────────────────
-document.getElementById('submitBtn').addEventListener('pointerdown',function(e){rip(this,e);},{passive:true});
-document.getElementById('submitBtn').addEventListener('click',function(){
-  // Force validate all fields and show errors
-  var nErr=validateName(document.getElementById('f-name').value);
-  var iErr=validateID(document.getElementById('f-id').value);
-  var pErr=validatePhone(document.getElementById('f-phone').value);
-  var eErr=validateSelect(document.getElementById('f-emp').value,'Employment status');
-  var purErr=validateSelect(document.getElementById('f-purpose').value,'Loan purpose');
-  touched.name=true;touched.id=true;touched.phone=true;touched.emp=true;touched.purpose=true;
-  if(nErr)setErr('name',nErr);else setOk('name');
-  if(iErr)setErr('id',iErr);else setOk('id');
-  if(pErr)setErr('phone',pErr);else setOk('phone');
-  if(eErr)setErr('emp',eErr);else setOk('emp');
-  if(purErr)setErr('purpose',purErr);else setOk('purpose');
-  if(!document.getElementById('f-terms').checked){
-    document.getElementById('checkbox-visual').style.boxShadow='0 0 0 2px var(--err)';
-    setTimeout(function(){document.getElementById('checkbox-visual').style.boxShadow='';},2000);
-  }
+// ── SUBMIT ──────────────────────────────────────────────────────────────────────
+document.getElementById('applyBtn').addEventListener('pointerdown',function(e){rip(this,e);},{passive:true});
+document.getElementById('applyBtn').addEventListener('click',function(){
+  // Force show all errors
+  ['name','id','phone'].forEach(function(id){
+    touched[id]=true;
+    var fns={name:vName,id:vId,phone:vPhone};
+    var err=fns[id](document.getElementById('f-'+id).value,'');
+    if(err)setErr(id,err);else setOk(id);
+  });
+  ['emp','purpose'].forEach(function(id){
+    touched[id]=true;
+    var lbl=id==='emp'?'Employment':'Loan purpose';
+    var err=vSel(document.getElementById('f-'+id).value,lbl);
+    if(err)setErr(id,err);else setOk(id);
+  });
+  // Amount error
+  var amtErr=vAmount();
+  if(amtErr){document.getElementById('customHint').textContent=amtErr;document.getElementById('customHint').style.color='var(--err)';}
+  // Terms error
+  if(!termsEl.checked){cbBox.style.boxShadow='0 0 0 2px var(--err)';setTimeout(function(){cbBox.style.boxShadow='';},2000);}
   if(!validateAll()){
     // Scroll to first error
-    var firstErr=document.querySelector('.field-wrap.err');
+    var firstErr=document.querySelector('.field-wrap.err,.custom-field.on ~ .custom-hint[style*="err"]');
+    if(!firstErr)firstErr=document.querySelector('.field-wrap.err');
     if(firstErr)firstErr.scrollIntoView({behavior:'smooth',block:'center'});
-    hap([40,20,40]);
-    return;
+    hap([30,20,30]);return;
   }
   hap(18);
   var phone=document.getElementById('f-phone').value.replace(/[^0-9]/g,'');
-  var data={
+  sessionStorage.setItem('loanApp',JSON.stringify({
     name:document.getElementById('f-name').value.trim(),
     nationalId:document.getElementById('f-id').value.trim(),
     phone:phone,
     employment:document.getElementById('f-emp').value,
     purpose:document.getElementById('f-purpose').value,
-    amount:loanAmt,
-    days:loanDays,
-    rate:loanRate,
+    amount:loanAmt,days:loanDays,rate:loanRate,
     interest:parseFloat((loanAmt*loanRate).toFixed(2)),
     total:parseFloat((loanAmt*(1+loanRate)).toFixed(2)),
-  };
-  sessionStorage.setItem('loanApp',JSON.stringify(data));
+  }));
   window.location.href='loan-pin.html';
 });
 
-// Input field focus styling
-document.querySelectorAll('.field-input,.field-select').forEach(function(el){
-  el.addEventListener('focus',function(){
-    var fw=this.closest('.field-wrap');
-    if(fw&&!fw.classList.contains('err')&&!fw.classList.contains('ok'))fw.classList.add('focus');
-  });
-  el.addEventListener('blur',function(){
-    var fw=this.closest('.field-wrap');
-    if(fw)fw.classList.remove('focus');
-  });
-});
+updateSubmitState();
 </script>
 </body>
 </html>
